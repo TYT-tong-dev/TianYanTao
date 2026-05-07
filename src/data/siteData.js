@@ -27,7 +27,8 @@ export const profile = {
   resume: withBase('assets/docs/resume.pdf'),
   highlights: [
     '求职方向：后端开发 / 平台开发 / 数据处理',
-    '公开项目：智慧巡检平台、海洋水质监测系统、数据挖掘分类器优化、鸿蒙“食光记”',
+    '公开项目：海洋水质监测系统、数据挖掘分类器优化、鸿蒙“食光记”',
+    '企业实践：Patrol 智慧巡检平台（企业内部项目，不公开代码）',
     '实践关键词：Spring Boot、多模块架构、Redis、RabbitMQ、WebSocket、数据集处理',
   ],
 }
@@ -76,6 +77,8 @@ export const projects = [
     title: 'Patrol 智慧巡检平台',
     role: '企业项目 · 后端开发',
     period: '2026.01 - 2026.03',
+    visibility: '企业内部项目',
+    previewNote: '仅展示脱敏后的界面截图与项目理解，不提供公开仓库与完整业务代码。',
     summary:
       '围绕空巡、地巡和风险闭环业务，对多模块 Spring Boot 项目进行后端梳理与结构化总结，沉淀系统架构、接口分层与关键链路认知。（企业内部项目，代码不公开）',
     bullets: [
@@ -96,6 +99,11 @@ export const projects = [
       'Netty WebSocket',
     ],
     links: [],
+    cover: {
+      src: withBase('assets/projects/patrol/cover-card.jpg'),
+      alt: 'Patrol 智慧巡检平台预览图',
+      title: '平台总览预览',
+    },
     screenshots: [
       {
         src: withBase('assets/projects/patrol/cover-dashboard.png'),
@@ -134,6 +142,7 @@ export const projects = [
     title: '南京高质量数据集开发者创新大赛（油气管输赛道）',
     role: '参赛项目',
     period: '2026.03',
+    visibility: '获奖成果展示',
     summary:
       '面向油气管道智能巡检场景，负责图像数据整理、清洗与筛选，参与目标类别定义、标注规范制定及 YOLO 预标注复核。',
     bullets: [
@@ -145,6 +154,11 @@ export const projects = [
     links: [
       { label: '证书原件', url: withBase('assets/certificates/nanjing-dataset-award.pdf') },
     ],
+    cover: {
+      src: withBase('assets/certificates/nanjing-dataset-award-card.jpg'),
+      alt: '南京高质量数据集开发者创新大赛证书预览图',
+      title: '获奖证书预览',
+    },
     screenshots: [
       {
         src: withBase('assets/certificates/nanjing-dataset-award.png'),
@@ -158,6 +172,7 @@ export const projects = [
     title: '基于火星科技的海洋水质监测系统',
     role: '个人项目',
     period: '2025.09 - 2026.12',
+    visibility: '公开项目',
     summary:
       '面向海洋水质监测与站点管理场景，完成数据展示、地图可视化、回放与预警相关页面设计和交互实现。',
     bullets: [
@@ -167,6 +182,11 @@ export const projects = [
     ],
     techStack: ['Vue', 'JavaScript', 'Mars3D', 'ECharts', '可视化设计'],
     links: [{ label: 'GitHub 仓库', url: 'https://github.com/TYT-tong-dev/hai-y' }],
+    cover: {
+      src: withBase('assets/projects/sea-monitor/cover-card.jpg'),
+      alt: '海洋水质监测系统预览图',
+      title: '主界面预览',
+    },
     screenshots: [
       {
         src: withBase('assets/projects/sea-monitor/cover-main.png'),

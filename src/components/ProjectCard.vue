@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   project: {
@@ -10,8 +10,11 @@ const props = defineProps({
 
 const emit = defineEmits(['open-gallery'])
 
-const cover = computed(() => props.project.screenshots[0])
-const previewShots = computed(() => props.project.screenshots.slice(1, 5))
+const cover = computed(() => props.project.cover || props.project.screenshots[0])
+const coverLoadFailed = ref(false)
+const galleryCta = computed(() =>
+  props.project.screenshots.length > 1 ? '查看完整项目图集' : '查看项目预览',
+)
 
 const openGalleryAt = (index) => {
   emit('open-gallery', {
@@ -20,6 +23,10 @@ const openGalleryAt = (index) => {
     items: props.project.screenshots,
     index,
   })
+}
+
+const onCoverError = () => {
+  coverLoadFailed.value = true
 }
 </script>
 
@@ -33,6 +40,10 @@ const openGalleryAt = (index) => {
 
       <h3>{{ project.title }}</h3>
       <p class="project-card__summary">{{ project.summary }}</p>
+
+      <p v-if="project.previewNote" class="project-card__note">
+        {{ project.previewNote }}
+      </p>
 
       <ul class="project-card__bullets">
         <li v-for="bullet in project.bullets" :key="bullet">
@@ -59,29 +70,28 @@ const openGalleryAt = (index) => {
 
     <div class="project-card__media">
       <button class="project-card__cover" type="button" @click="openGalleryAt(0)">
-        <img :src="cover.src" :alt="cover.alt || project.title" loading="lazy" />
+        <img
+          v-if="!coverLoadFailed"
+          :src="cover.src"
+          :alt="cover.alt || project.title"
+          loading="lazy"
+          decoding="async"
+          @error="onCoverError"
+        />
+        <div v-else class="project-card__cover-fallback">
+          <strong>{{ project.title }}</strong>
+          <span>图片加载失败，点击查看详情</span>
+        </div>
         <span>{{ cover.title || '项目封面' }}</span>
       </button>
 
-      <div class="project-card__gallery">
-        <button
-          v-for="(shot, index) in previewShots"
-          :key="shot.src"
-          type="button"
-          class="project-card__shot"
-          @click="openGalleryAt(index + 1)"
-        >
-          <img :src="shot.src" :alt="shot.alt || shot.title" loading="lazy" />
-        </button>
+      <div class="project-card__preview-meta">
+        <span>{{ project.screenshots.length }} 张项目图片</span>
+        <span v-if="project.visibility">{{ project.visibility }}</span>
       </div>
 
-      <button
-        v-if="project.screenshots.length > 1"
-        class="project-card__more"
-        type="button"
-        @click="openGalleryAt(0)"
-      >
-        查看更多图片
+      <button class="project-card__more" type="button" @click="openGalleryAt(0)">
+        {{ galleryCta }}
       </button>
     </div>
   </article>

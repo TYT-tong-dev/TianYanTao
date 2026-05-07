@@ -150,10 +150,19 @@ onBeforeUnmount(() => {
 
     <main class="page-content">
       <section id="hero" class="hero" v-reveal>
-        <div class="hero__copy">
-          <p class="hero__eyebrow">Software Engineering / Backend Track</p>
-          <h1>{{ profile.name }}</h1>
-          <h2>{{ profile.title }}</h2>
+        <article class="hero-card hero-card--intro">
+          <div class="hero-card__head hero-card__head--intro">
+            <div>
+              <p class="hero__eyebrow">Software Engineering / Backend Track</p>
+              <h1>{{ profile.name }}</h1>
+              <h2>{{ profile.title }}</h2>
+            </div>
+
+            <span class="hero-card__badge hero-card__badge--desktop">
+              {{ education.school }} · {{ education.degree }}
+            </span>
+          </div>
+
           <p class="hero__intro">
             {{ profile.intro }}
           </p>
@@ -164,10 +173,25 @@ onBeforeUnmount(() => {
             <span>{{ profile.politicalStatus }}</span>
           </div>
 
-          <div class="hero__actions">
-            <a :href="profile.github" target="_blank" rel="noreferrer">GitHub</a>
-            <a :href="profile.resume" target="_blank" rel="noreferrer">PDF 简历</a>
-            <a :href="mailtoLink">邮箱联系</a>
+          <dl class="hero-card__meta-grid hero-card__meta-grid--split">
+            <div v-for="fact in resumeFacts" :key="fact.label" class="hero-card__meta-item">
+              <dt>{{ fact.label }}</dt>
+              <dd>
+                <a v-if="fact.href" :href="fact.href">
+                  {{ fact.value }}
+                </a>
+                <strong v-else>{{ fact.value }}</strong>
+              </dd>
+            </div>
+          </dl>
+
+          <div class="hero-card__section">
+            <p class="hero-card__section-label">编程语言</p>
+            <div class="hero-card__tags">
+              <span v-for="language in programmingLanguages" :key="language">
+                {{ language }}
+              </span>
+            </div>
           </div>
 
           <div class="hero__highlights">
@@ -175,60 +199,29 @@ onBeforeUnmount(() => {
               {{ item }}
             </article>
           </div>
-        </div>
 
-        <div class="hero__side">
+          <div class="hero__actions">
+            <a :href="profile.github" target="_blank" rel="noreferrer">GitHub</a>
+            <a :href="profile.resume" target="_blank" rel="noreferrer">PDF 简历</a>
+            <a :href="mailtoLink">邮箱联系</a>
+            <a :href="profile.cet4Proof" target="_blank" rel="noreferrer">CET-4 成绩单</a>
+          </div>
+        </article>
+
+        <aside class="hero__side">
           <article class="hero-card hero-card--photo">
-            <img :src="profile.avatar" :alt="profile.name" loading="lazy" />
-          </article>
-
-          <article class="hero-card hero-card--facts">
-            <div class="hero-card__head">
-              <div>
-                <p class="hero-card__eyebrow">Resume Snapshot</p>
-                <h3>个人信息区</h3>
-                <p class="hero-card__subtitle">
-                  {{ profile.title }} · {{ education.school }}
-                </p>
-              </div>
-
-              <span class="hero-card__badge">{{ education.degree }}</span>
-            </div>
-
-            <dl class="hero-card__meta-grid">
-              <div
-                v-for="fact in resumeFacts"
-                :key="fact.label"
-                class="hero-card__meta-item"
-              >
-                <dt>{{ fact.label }}</dt>
-                <dd>
-                  <a v-if="fact.href" :href="fact.href">
-                    {{ fact.value }}
-                  </a>
-                  <strong v-else>{{ fact.value }}</strong>
-                </dd>
-              </div>
-            </dl>
-
-            <div class="hero-card__section">
-              <p class="hero-card__section-label">编程语言</p>
-              <div class="hero-card__tags">
-                <span v-for="language in programmingLanguages" :key="language">
-                  {{ language }}
-                </span>
-              </div>
-            </div>
-
-            <div class="hero-card__links">
-              <a :href="profile.resume" target="_blank" rel="noreferrer">下载 PDF 简历</a>
-              <a :href="profile.github" target="_blank" rel="noreferrer">GitHub 主页</a>
-              <a :href="profile.cet4Proof" target="_blank" rel="noreferrer">
-                CET-4 成绩单
-              </a>
+            <img
+              :src="profile.avatar"
+              :alt="profile.name"
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div class="hero-photo__caption">
+              <strong>{{ education.school }}</strong>
+              <span>{{ profile.title }}</span>
             </div>
           </article>
-        </div>
+        </aside>
       </section>
 
       <section id="education" class="section-block" v-reveal>
@@ -283,7 +276,7 @@ onBeforeUnmount(() => {
       <section id="projects" class="section-block" v-reveal>
         <SectionTitle
           title="项目经历"
-          subtitle="展示后端方向、可视化项目实践和代表图片"
+          subtitle="区分公开作品与企业项目展示，首屏默认只加载轻量封面"
         />
 
         <div class="projects-grid">
