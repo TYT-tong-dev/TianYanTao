@@ -59,7 +59,7 @@ const openGalleryAt = (index) => {
 
     <div class="project-card__media">
       <button class="project-card__cover" type="button" @click="openGalleryAt(0)">
-        <img :src="cover.src" :alt="cover.alt || project.title" />
+        <img :src="cover.src" :alt="cover.alt || project.title" loading="lazy" />
         <span>{{ cover.title || '项目封面' }}</span>
       </button>
 

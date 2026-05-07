@@ -169,11 +169,17 @@ onBeforeUnmount(() => {
             <a :href="profile.resume" target="_blank" rel="noreferrer">PDF 简历</a>
             <a :href="mailtoLink">邮箱联系</a>
           </div>
+
+          <div class="hero__highlights">
+            <article v-for="item in profile.highlights" :key="item" class="hero-highlight">
+              {{ item }}
+            </article>
+          </div>
         </div>
 
         <div class="hero__side">
           <article class="hero-card hero-card--photo">
-            <img :src="profile.avatar" :alt="profile.name" />
+            <img :src="profile.avatar" :alt="profile.name" loading="lazy" />
           </article>
 
           <article class="hero-card hero-card--facts">
@@ -221,12 +227,6 @@ onBeforeUnmount(() => {
                 CET-4 成绩单
               </a>
             </div>
-          </article>
-        </div>
-
-        <div class="hero__highlights">
-          <article v-for="item in profile.highlights" :key="item" class="hero-highlight">
-            {{ item }}
           </article>
         </div>
       </section>

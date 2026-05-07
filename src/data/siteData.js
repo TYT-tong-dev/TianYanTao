@@ -74,10 +74,10 @@ export const projects = [
   {
     id: 'patrol',
     title: 'Patrol 智慧巡检平台',
-    role: '后端开发项目',
+    role: '企业项目 · 后端开发',
     period: '2026.01 - 2026.03',
     summary:
-      '围绕空巡、地巡和风险闭环业务，对多模块 Spring Boot 项目进行后端梳理与结构化总结，沉淀系统架构、接口分层与关键链路认知。',
+      '围绕空巡、地巡和风险闭环业务，对多模块 Spring Boot 项目进行后端梳理与结构化总结，沉淀系统架构、接口分层与关键链路认知。（企业内部项目，代码不公开）',
     bullets: [
       '梳理 Spring Boot 多模块结构，覆盖 patrol-admin、framework、common、空巡、地巡、DJI 接入与 WebSocket 服务等核心模块。',
       '归纳 Spring Security + JWT、MyBatis、PostgreSQL、Redis、RabbitMQ、MinIO、Netty WebSocket 等技术机制与运行关系。',
@@ -95,7 +95,7 @@ export const projects = [
       'MinIO',
       'Netty WebSocket',
     ],
-    links: [{ label: '项目文档', url: withBase('assets/docs/patrol-project.md') }],
+    links: [],
     screenshots: [
       {
         src: withBase('assets/projects/patrol/cover-dashboard.png'),
